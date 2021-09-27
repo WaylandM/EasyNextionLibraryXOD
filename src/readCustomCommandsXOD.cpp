@@ -5,19 +5,22 @@
  */
 
 // include this library's description file
-#ifndef EasyNextionLibrary_h
-#include "EasyNextionLibrary.h"
+#ifndef EasyNextionLibraryXOD_h
+#include "EasyNextionLibraryXOD.h"
 #endif
 
+/* MTW 27/09/21
 #ifndef trigger_h
 #include "trigger.h"
 #endif
+*/
+
 // This was a part of the NextionListen(), but we seperated it, 
 // in order to make easier the modifications for it, especially in the case of a custom protocol
 // Now, we only have two command groups: the "Trigger" and "Page"
 
-void EasyNex::readCommand(){
-
+uint8_t EasyNex::readCommand(){
+  uint8_t trigNum = 255;
 				
   switch(_cmd1){
     case 'P': /*or <case 0x50:>  If 'P' matches, we have the command group "Page". 
@@ -58,15 +61,17 @@ void EasyNex::readCommand(){
                  * Then, the library will call the void trigger1()
                  * the code inside the trigger1() will run once ...
                  */
-      callTriggerFunction(); // We made a separate file callTriggers.cpp for this function, 
+      //callTriggerFunction(); // We made a separate file callTriggers.cpp for this function, 
                              // as it would be too long to fit in here, because there are
                              // 50 predefined cases for the triggers. 
+
+      trigNum = _cmd1;
       break;
     
     default:
       cmdGroup = _cmd1;  // stored in the public variable cmdGroup for later use in the main code
       cmdLength = _len;  // stored in the public variable cmdLength for later use in the main code
-      easyNexReadCustomCommand();
+      //easyNexReadCustomCommand();
                     
       break;
                
@@ -100,6 +105,7 @@ void EasyNex::readCommand(){
       for the cmdGroup, the one that we have stored the _cmd for public use and we can call it with myObject.cmdGroup. This is why we made cmdGroup a public variable.
                      */
   }
+  return trigNum;
 }
 
 

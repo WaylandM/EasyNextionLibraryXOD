@@ -13,8 +13,8 @@
   //------------------------------------------------------
  // ensure this library description is only included once
 //--------------------------------------------------------
-#ifndef EasyNextionLibrary_h
-#define EasyNextionLibrary_h
+#ifndef EasyNextionLibraryXOD_h
+#define EasyNextionLibraryXOD_h
 
 
 
@@ -82,7 +82,7 @@ class EasyNex {
 		void begin(unsigned long baud = 9600);
     void writeNum(String, uint32_t);
     void writeStr(String, String txt = "cmd");
-		void NextionListen(void);
+		uint8_t NextionListen(void);
     uint32_t readNumber(String);
     String readStr(String);
     int readByte();

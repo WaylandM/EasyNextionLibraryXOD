@@ -5,13 +5,15 @@
  */
 
 // include this library's description file
-#ifndef EasyNextionLibrary_h
-#include "EasyNextionLibrary.h"
+#ifndef EasyNextionLibraryXOD_h
+#include "EasyNextionLibraryXOD.h"
 #endif
 
+/* MTW 27/09/21
 #ifndef trigger_h
 #include "trigger.h"
 #endif
+*/
 
 //-------------------------------------------------------------------------
  // Constructor : Function that handles the creation and setup of instances
@@ -301,7 +303,8 @@ int  EasyNex::readByte(){
  * from Nextion touch panel. 
  * Actually, you should place it in your loop function.
  */
-void EasyNex::NextionListen(){
+uint8_t EasyNex::NextionListen(){
+  uint8_t triggerNumber = 255;
 	if(_serial->available() > 2){         // Read if more then 2 bytes come (we always send more than 2 <#> <len> <cmd> <id>
     _start_char = _serial->read();      // Create a local variable (start_char) read and store the first byte on it  
     _tmr1 = millis();
@@ -328,10 +331,11 @@ void EasyNex::NextionListen(){
   
       if(_cmdFound == true){                  // So..., A command is found (bytes in _serial buffer egual more than len)
         _cmd1 = _serial->read();              // Read and store the next byte. This is the command group
-        readCommand();                        // We call the readCommand(), 
+        triggerNumber = readCommand();                        // We call the readCommand(), 
                                               // in which we read, seperate and execute the commands 
 			}
 		}
 	}
+  return triggerNumber;
 }
 
