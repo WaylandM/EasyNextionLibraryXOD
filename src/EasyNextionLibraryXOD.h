@@ -116,8 +116,8 @@ class EasyNex {
   //-----------------------------------------
 	private:
     HardwareSerial* _serial;
-		void readCommand(void);
-    void callTriggerFunction(void);
+		uint8_t readCommand(void);
+    //void callTriggerFunction(void);
     
       //----------------------------------------------
      // for function writeNum() (write to numeric attribute)
