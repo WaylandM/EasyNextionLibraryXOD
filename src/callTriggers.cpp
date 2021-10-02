@@ -10,7 +10,7 @@
  */
 
 #ifndef EasyNextionLibrary_h
-#include "EasyNextionLibrary.h"
+#include "EasyNextionLibraryXOD.h"
 #endif                        
                                 
 #ifndef trigger_h
