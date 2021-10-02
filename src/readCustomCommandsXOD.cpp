@@ -65,7 +65,7 @@ uint8_t EasyNex::readCommand(){
                              // as it would be too long to fit in here, because there are
                              // 50 predefined cases for the triggers. 
 
-      trigNum = _cmd1;
+      trigNum = _serial->read();
       break;
     
     default:
