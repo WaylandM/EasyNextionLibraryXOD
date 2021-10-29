@@ -31,8 +31,12 @@ uint8_t EasyNex::readCommand(){
                * <<<<Every event written on Nextion's pages preinitialize page event will run every time the page is Loaded>>>>
                *  it is importand to let the Arduino "Know" when and which Page change.
                */
-      lastCurrentPageId = currentPageId;
-      currentPageId = _serial->read();                   
+      uint8_t prevPageID = currentPageId;
+      //lastCurrentPageId = currentPageId;
+      currentPageId = _serial->read();
+      if (prevPageID != currentPageId) {
+        lastCurrentPageId = prevPageID;
+      }                          
       break;
       
       
